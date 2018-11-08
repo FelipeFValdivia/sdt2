@@ -18,6 +18,9 @@ class Plane
   def set_tank(tank)
     @tank = tank
   end
+  def set_tower(tower)
+    @tower = tower
+  end
   def get_company
     @company
   end
@@ -35,53 +38,65 @@ class Plane
   end
 end
 
-puts "Bienvenido al vuelo\n[plane] Nombre de la Aerolinea y numero de plane:"
+puts "Bienvenido al vuelo\n[Avion] Nombre de la Aerolinea y numero de Avion:"
 a = gets.chomp
 linea = a.split(" ")[0]
 a = a.split(" ")[1]
-puts "[plane - " + a + "] Peso maximo de carga [Kg]:" 
+puts "[Avion - " + a + "] Peso maximo de carga [Kg]:" 
 b = gets.chomp
-puts "[plane - " + a + "] Capacidad del tanque de combustible [L]:" 
+puts "[Avion - " + a + "] Capacidad del tanque de combustible [L]:" 
 c = gets.chomp
-puts "[plane - " + a + "] Torre de Control Inicial:" 
+puts "[Avion - " + a + "] Torre de Control Inicial:" 
 d = gets.chomp
-
-
-
 
 plane = Plane.new(linea, a, b, c, d)
 
 
 
-response = 0
 puts "[Avion - " + a + "]: Esperando pista aterrizaje..."
+response = 0
 
-
-stub = Control::Stub.new(d + ':50051', :this_channel_is_insecure)
+stub = Control::Stub.new('192.168.43.61:50051', :this_channel_is_insecure)
 response = stub.get_lane(Lane.new(value: 45))
 response.value.to_i
-while response < 1 
+
+while response.value.to_i < 1
   puts "Sin pista disponible, espera en la altura #{-response.value} km"
-	stub = Control::Stub.new(d + ':50051', :this_channel_is_insecure)
+  stub = Control::Stub.new('192.168.43.61:50051', :this_channel_is_insecure)
   response = stub.get_lane(Lane.new(value: 45))
   response.value.to_i
 end
-
 puts "[Avion - " + a + "]: Aterrizando en la pista " + response.value.to_i.to_s + " ..." 
+
 
 
 puts "[Avion - " + a + "]: Presione enter para despegar"
 gets.chomp
 
+stub = Control::Stub.new('192.168.43.61:50051', :this_channel_is_insecure)
+stub.send_airplane_name(Name.new(value: a))
+
+
 puts "[Avion - " + a + "]: Ingrese destino:"
 destiny = gets.chomp
 puts "[Avion - " + a + "]: Pasando por el Gate..."
-puts "[Avion - " + a + "]: Todos los pasajeros a bordo y combustible cargado."
-puts "[Avion - " + a + "]: Pidiendo instrucciones para despegar..."
 
-#TODO avion predecesorTodas las pistas est´an ocupadas, el avi´on predecesor es BRC3536...
+puts "[Avion - " + a + "]: Pidiendo instrucciones para despegar..."
+stub = Control::Stub.new('192.168.43.61:50051', :this_channel_is_insecure)
+response = stub.get_out_lane(Lane.new(value: response.value.to_i))
+response.value.to_i
+
+while response.value.to_i < 1
+  stub = Control::Stub.new('192.168.43.61:50051', :this_channel_is_insecure)
+  response = stub.get_out_lane(Lane.new(value: 45))
+  response.value.to_i
+end
+
 puts "[Avion - " + a + "]: Todas las pistas estan ocupadas, el avion predecesor es BRC3536..."
 
+
+puts "[Avion - " + a + "]: Pista " + response.value.to_i.to_s + " asignada y altura de  km."
+#TODO avion predecesorTodas las pistas est´an ocupadas, el avi´on predecesor es BRC3536...
+
 #TODO pista y altura
-puts "[Avion - " + a + "]: Pista 2 asignada y altura de 5 km."
 puts "[Avion - " + a + "]: Despegando..."
