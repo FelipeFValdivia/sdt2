@@ -22,4 +22,7 @@ service Control {
     rpc SendAirplaneName(Name) returns (Lane) {}
     rpc SendDestination(Name) returns (Name) {}
     rpc CheckPassengerAndFuell(FuellDestination) returns (Name) {}
+    rpc CheckRunway(Name) returns (Lane) {}
+    rpc GetOutRunway(Lane) returns (Lane) {}
+    
 }

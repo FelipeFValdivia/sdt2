@@ -18,6 +18,8 @@ module Control
     rpc :SendAirplaneName, Name, Lane
     rpc :SendDestination, Name, Name
     rpc :CheckPassengerAndFuell, FuellDestination, Name
+    rpc :CheckRunway, Name, Lane
+    rpc :GetOutRunway, Lane, Lane
   end
 
   Stub = Service.rpc_stub_class

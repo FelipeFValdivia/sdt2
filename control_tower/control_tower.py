@@ -60,8 +60,6 @@ def get_lane(n):
 	print("[Torre de control - " + name + "] Asignando pista de aterrizaje...")
 	current_lane = -1
 	for i in range(0, landing_lane):
-		print(bussy_landing_lanes[i]) 
-		print(i) 
 		if not bussy_landing_lanes[i]:
 			current_lane = i
 			break
@@ -82,13 +80,17 @@ def get_out_lane(n):
 
 def send_airplane_name(airplane_name):
 	print("[Torre de control - " + name + "] Avion " + airplane_name + " quiere despegar	" )
-	planes_hash[airplane_name] = {}	
+	planes_hash[str(airplane_name).encode("ascii")] = {}	
+	print(airplane_name)
+	print(planes_hash)
 	return 0
 
 
 def send_destination(airplane_name, destination):
+	print(destination)
+	print(planes_hash[str(airplane_name).encode("ascii")])
 	print("[Torre de control - " + name + "] Recibiendo el destindo del avion " + airplane_name)
-		planes_hash[airplane_name][destination] = destination
+	planes_hash[str(airplane_name).encode("ascii")][str(destination).encode("ascii")] = destination.encode("ascii")
 	return "1231321"
 
 def check_passenger_and_fuell(airplane_name, fuell, passengers):

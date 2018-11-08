@@ -80,10 +80,11 @@ stub.send_airplane_name(Name.new(value: a))
 puts "[Avion - " + a + "]: Ingrese destino:"
 destiny = gets.chomp
 stub = Control::Stub.new('localhost:50051', :this_channel_is_insecure)
-new_tower = stub.send_destination(Name.new(value: 45, destination: destiny))
+puts destiny
+new_tower = stub.send_destination(Name.new(value: a, destination: destiny))
 puts new_tower
-avion.set_tower = new_tower
-puts "El Destino es " + avion.get_tower
+plane.set_tower(new_tower.value.to_s)
+puts "El Destino es " + plane.get_tower
 puts "[Avion - " + a + "]: Pasando por el Gate..."
 
 puts "[Avion - " + a + "]: Pidiendo instrucciones para despegar..."
