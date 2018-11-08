@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message Lane {
+    float value = 1;
+}
+
+service Control {
+    rpc GetLane(Lane) returns (Lane) {}
+}

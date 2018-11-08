@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+message Lane {
+    float value = 1;
+}
+
+message Name {
+    string value = 1;
+}
+
+service Control {
+    rpc GetLane(Lane) returns (Lane) {}
+    rpc GetOutLane(Lane) returns (Lane) {}
+    rpc SendAirplaneName(Name) returns (Lane) {}
+}
