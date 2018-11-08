@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\rcontrol.proto\"\x15\n\x04Lane\x12\r\n\x05value\x18\x01 \x01(\x02\"*\n\x04Name\x12\r\n\x05value\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65stination\x18\x02 \x01(\t\"C\n\x10\x46uellDestination\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x66uell\x18\x02 \x01(\x05\x12\x12\n\npassengers\x18\x03 \x01(\x05\x32\xfe\x01\n\x07\x43ontrol\x12\x19\n\x07GetLane\x12\x05.Lane\x1a\x05.Lane\"\x00\x12\x1c\n\nGetOutLane\x12\x05.Lane\x1a\x05.Lane\"\x00\x12\"\n\x10SendAirplaneName\x12\x05.Name\x1a\x05.Lane\"\x00\x12!\n\x0fSendDestination\x12\x05.Name\x1a\x05.Name\"\x00\x12\x34\n\x16\x43heckPassengerAndFuell\x12\x11.FuellDestination\x1a\x05.Name\"\x00\x12\x1d\n\x0b\x43heckRunway\x12\x05.Name\x1a\x05.Lane\"\x00\x12\x1e\n\x0cGetOutRunway\x12\x05.Lane\x1a\x05.Lane\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\rcontrol.proto\"\x15\n\x04Lane\x12\r\n\x05value\x18\x01 \x01(\x02\"*\n\x04Name\x12\r\n\x05value\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65stination\x18\x02 \x01(\t\"C\n\x10\x46uellDestination\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x66uell\x18\x02 \x01(\x05\x12\x12\n\npassengers\x18\x03 \x01(\x05\"\x15\n\x05Plane\x12\x0c\n\x04name\x18\x01 \x01(\t2\xc4\x02\n\x07\x43ontrol\x12\x19\n\x07GetLane\x12\x05.Name\x1a\x05.Lane\"\x00\x12\x1c\n\nGetOutLane\x12\x05.Lane\x1a\x05.Lane\"\x00\x12\"\n\x10SendAirplaneName\x12\x05.Name\x1a\x05.Lane\"\x00\x12!\n\x0fSendDestination\x12\x05.Name\x1a\x05.Name\"\x00\x12\x34\n\x16\x43heckPassengerAndFuell\x12\x11.FuellDestination\x1a\x05.Name\"\x00\x12\x1d\n\x0b\x43heckRunway\x12\x05.Name\x1a\x05.Lane\"\x00\x12\x1e\n\x0cGetOutRunway\x12\x05.Lane\x1a\x05.Lane\"\x00\x12\x1c\n\tGetPlanes\x12\x05.Lane\x1a\x06.Plane\"\x00\x12&\n\x13GetDeparturesPlanes\x12\x05.Lane\x1a\x06.Plane\"\x00\x62\x06proto3')
 )
 
 
@@ -138,9 +138,41 @@ _FUELLDESTINATION = _descriptor.Descriptor(
   serialized_end=151,
 )
 
+
+_PLANE = _descriptor.Descriptor(
+  name='Plane',
+  full_name='Plane',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='Plane.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=153,
+  serialized_end=174,
+)
+
 DESCRIPTOR.message_types_by_name['Lane'] = _LANE
 DESCRIPTOR.message_types_by_name['Name'] = _NAME
 DESCRIPTOR.message_types_by_name['FuellDestination'] = _FUELLDESTINATION
+DESCRIPTOR.message_types_by_name['Plane'] = _PLANE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Lane = _reflection.GeneratedProtocolMessageType('Lane', (_message.Message,), dict(
@@ -164,6 +196,13 @@ FuellDestination = _reflection.GeneratedProtocolMessageType('FuellDestination', 
   ))
 _sym_db.RegisterMessage(FuellDestination)
 
+Plane = _reflection.GeneratedProtocolMessageType('Plane', (_message.Message,), dict(
+  DESCRIPTOR = _PLANE,
+  __module__ = 'control_pb2'
+  # @@protoc_insertion_point(class_scope:Plane)
+  ))
+_sym_db.RegisterMessage(Plane)
+
 
 
 _CONTROL = _descriptor.ServiceDescriptor(
@@ -172,15 +211,15 @@ _CONTROL = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=154,
-  serialized_end=408,
+  serialized_start=177,
+  serialized_end=501,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetLane',
     full_name='Control.GetLane',
     index=0,
     containing_service=None,
-    input_type=_LANE,
+    input_type=_NAME,
     output_type=_LANE,
     serialized_options=None,
   ),
@@ -236,6 +275,24 @@ _CONTROL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_LANE,
     output_type=_LANE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetPlanes',
+    full_name='Control.GetPlanes',
+    index=7,
+    containing_service=None,
+    input_type=_LANE,
+    output_type=_PLANE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetDeparturesPlanes',
+    full_name='Control.GetDeparturesPlanes',
+    index=8,
+    containing_service=None,
+    input_type=_LANE,
+    output_type=_PLANE,
     serialized_options=None,
   ),
 ])

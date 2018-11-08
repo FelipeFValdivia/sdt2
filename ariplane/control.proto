@@ -15,14 +15,18 @@ message FuellDestination {
     int32 passengers = 3;
 }
 
+message Plane {
+    string name = 1;
+}
 
 service Control {
-    rpc GetLane(Lane) returns (Lane) {}
+    rpc GetLane(Name) returns (Lane) {}
     rpc GetOutLane(Lane) returns (Lane) {}
     rpc SendAirplaneName(Name) returns (Lane) {}
     rpc SendDestination(Name) returns (Name) {}
     rpc CheckPassengerAndFuell(FuellDestination) returns (Name) {}
     rpc CheckRunway(Name) returns (Lane) {}
     rpc GetOutRunway(Lane) returns (Lane) {}
-    
+    rpc GetPlanes(Lane) returns (Plane) {}
+    rpc GetDeparturesPlanes(Lane) returns (Plane) {}
 }

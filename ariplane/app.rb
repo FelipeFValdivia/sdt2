@@ -40,6 +40,7 @@ end
 
 puts "Bienvenido al vuelo\n[Avion] Nombre de la Aerolinea y numero de Avion:"
 a = gets.chomp
+line_name = a
 linea = a.split(" ")[0]
 a = a.split(" ")[1]
 puts "[Avion - " + a + "] Peso maximo de carga [Kg]:" 
@@ -58,12 +59,12 @@ puts "[Avion - " + a + "]: Esperando pista aterrizaje..."
 response = -1
 
 stub = Control::Stub.new('localhost:50051', :this_channel_is_insecure)
-response = stub.get_lane(Lane.new(value: 45))
+response = stub.get_lane(Name.new(value: line_name))
 
 while response.value.to_i < 0
   puts "Sin pista disponible, espera en la altura #{-response.value.to_i} km"
   stub = Control::Stub.new('localhost:50051', :this_channel_is_insecure)
-  response = stub.get_lane(Lane.new(value: 45))
+  response = stub.get_lane(Name.new(value: line_name))
   response.value.to_i
 end
 puts "[Avion - " + a + "]: Aterrizando en la pista " + response.value.to_i.to_s + " ..." 

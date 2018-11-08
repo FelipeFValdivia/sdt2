@@ -16,7 +16,7 @@ class ControlStub(object):
     """
     self.GetLane = channel.unary_unary(
         '/Control/GetLane',
-        request_serializer=control__pb2.Lane.SerializeToString,
+        request_serializer=control__pb2.Name.SerializeToString,
         response_deserializer=control__pb2.Lane.FromString,
         )
     self.GetOutLane = channel.unary_unary(
@@ -48,6 +48,16 @@ class ControlStub(object):
         '/Control/GetOutRunway',
         request_serializer=control__pb2.Lane.SerializeToString,
         response_deserializer=control__pb2.Lane.FromString,
+        )
+    self.GetPlanes = channel.unary_unary(
+        '/Control/GetPlanes',
+        request_serializer=control__pb2.Lane.SerializeToString,
+        response_deserializer=control__pb2.Plane.FromString,
+        )
+    self.GetDeparturesPlanes = channel.unary_unary(
+        '/Control/GetDeparturesPlanes',
+        request_serializer=control__pb2.Lane.SerializeToString,
+        response_deserializer=control__pb2.Plane.FromString,
         )
 
 
@@ -104,12 +114,26 @@ class ControlServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GetPlanes(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetDeparturesPlanes(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_ControlServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'GetLane': grpc.unary_unary_rpc_method_handler(
           servicer.GetLane,
-          request_deserializer=control__pb2.Lane.FromString,
+          request_deserializer=control__pb2.Name.FromString,
           response_serializer=control__pb2.Lane.SerializeToString,
       ),
       'GetOutLane': grpc.unary_unary_rpc_method_handler(
@@ -141,6 +165,16 @@ def add_ControlServicer_to_server(servicer, server):
           servicer.GetOutRunway,
           request_deserializer=control__pb2.Lane.FromString,
           response_serializer=control__pb2.Lane.SerializeToString,
+      ),
+      'GetPlanes': grpc.unary_unary_rpc_method_handler(
+          servicer.GetPlanes,
+          request_deserializer=control__pb2.Lane.FromString,
+          response_serializer=control__pb2.Plane.SerializeToString,
+      ),
+      'GetDeparturesPlanes': grpc.unary_unary_rpc_method_handler(
+          servicer.GetDeparturesPlanes,
+          request_deserializer=control__pb2.Lane.FromString,
+          response_serializer=control__pb2.Plane.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

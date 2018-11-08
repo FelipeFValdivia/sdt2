@@ -16,8 +16,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :fuell, :int32, 2
     optional :passengers, :int32, 3
   end
+  add_message "Plane" do
+    optional :name, :string, 1
+  end
 end
 
 Lane = Google::Protobuf::DescriptorPool.generated_pool.lookup("Lane").msgclass
 Name = Google::Protobuf::DescriptorPool.generated_pool.lookup("Name").msgclass
 FuellDestination = Google::Protobuf::DescriptorPool.generated_pool.lookup("FuellDestination").msgclass
+Plane = Google::Protobuf::DescriptorPool.generated_pool.lookup("Plane").msgclass
