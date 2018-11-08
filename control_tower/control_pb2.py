@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\rcontrol.proto\"\x15\n\x04Lane\x12\r\n\x05value\x18\x01 \x01(\x02\"*\n\x04Name\x12\r\n\x05value\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65stination\x18\x02 \x01(\t\"C\n\x10\x46uellDestination\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x66uell\x18\x02 \x01(\x05\x12\x12\n\npassengers\x18\x03 \x01(\x05\x32\xbf\x01\n\x07\x43ontrol\x12\x19\n\x07GetLane\x12\x05.Lane\x1a\x05.Lane\"\x00\x12\x1c\n\nGetOutLane\x12\x05.Lane\x1a\x05.Lane\"\x00\x12\"\n\x10SendAirplaneName\x12\x05.Name\x1a\x05.Lane\"\x00\x12!\n\x0fSendDestination\x12\x05.Name\x1a\x05.Name\"\x00\x12\x34\n\x16\x43heckPassengerAndFuell\x12\x11.FuellDestination\x1a\x05.Name\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\rcontrol.proto\"\x15\n\x04Lane\x12\r\n\x05value\x18\x01 \x01(\x02\"*\n\x04Name\x12\r\n\x05value\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65stination\x18\x02 \x01(\t\"C\n\x10\x46uellDestination\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x66uell\x18\x02 \x01(\x05\x12\x12\n\npassengers\x18\x03 \x01(\x05\x32\xfe\x01\n\x07\x43ontrol\x12\x19\n\x07GetLane\x12\x05.Lane\x1a\x05.Lane\"\x00\x12\x1c\n\nGetOutLane\x12\x05.Lane\x1a\x05.Lane\"\x00\x12\"\n\x10SendAirplaneName\x12\x05.Name\x1a\x05.Lane\"\x00\x12!\n\x0fSendDestination\x12\x05.Name\x1a\x05.Name\"\x00\x12\x34\n\x16\x43heckPassengerAndFuell\x12\x11.FuellDestination\x1a\x05.Name\"\x00\x12\x1d\n\x0b\x43heckRunway\x12\x05.Name\x1a\x05.Lane\"\x00\x12\x1e\n\x0cGetOutRunway\x12\x05.Lane\x1a\x05.Lane\"\x00\x62\x06proto3')
 )
 
 
@@ -173,7 +173,7 @@ _CONTROL = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   serialized_start=154,
-  serialized_end=345,
+  serialized_end=408,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetLane',
@@ -218,6 +218,24 @@ _CONTROL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_FUELLDESTINATION,
     output_type=_NAME,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CheckRunway',
+    full_name='Control.CheckRunway',
+    index=5,
+    containing_service=None,
+    input_type=_NAME,
+    output_type=_LANE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetOutRunway',
+    full_name='Control.GetOutRunway',
+    index=6,
+    containing_service=None,
+    input_type=_LANE,
+    output_type=_LANE,
     serialized_options=None,
   ),
 ])

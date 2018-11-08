@@ -47,7 +47,12 @@ class ControlServicer(control_pb2_grpc.ControlServicer):
 	def CheckRunway(self, request, context):
 		response = control_pb2.Name()
 		response.value = check_runway(request.value)
-		return response		
+		return response
+
+	def GetOutRunway(self, request, context):
+		response = control_pb2.Lane()
+		response.value = get_out_runway(request.value)
+		return response
 
 
 def get_lane(n):
@@ -78,14 +83,12 @@ def get_out_lane(n):
 def send_airplane_name(airplane_name):
 	print("[Torre de control - " + name + "] Avion " + airplane_name + " quiere despegar	" )
 	planes_hash[airplane_name] = {}	
-	print(planes_hash)
 	return 0
 
 
 def send_destination(airplane_name, destination):
 	print("[Torre de control - " + name + "] Recibiendo el destindo del avion " + airplane_name)
-	print(planes_hash)
-	planes_hash[airplane_name][destination] = destination
+		planes_hash[airplane_name][destination] = destination
 	return "1231321"
 
 def check_passenger_and_fuell(airplane_name, fuell, passengers):
