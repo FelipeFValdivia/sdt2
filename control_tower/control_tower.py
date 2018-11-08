@@ -34,9 +34,23 @@ class ControlServicer(control_pb2_grpc.ControlServicer):
 		response.value = send_airplane_name(request.value)
 		return response
 
+	def SendDestination(self, request, context):
+		response = control_pb2.Name()
+		response.value = send_destination(request.value, request.destination)
+		return response
+
+	def CheckPassengerAndFuell(self, request, context):
+		response = control_pb2.FuellDestination()
+		response.value = check_passenger_and_fuell(request.name, request.fuell, request.passengers)
+		return response
+
+	def CheckRunway(self, request, context):
+		response = control_pb2.Name()
+		response.value = check_runway(request.value)
+		return response		
+
 
 def get_lane(n):
-	print(bussy_landing_lanes)
 	print("[Torre de control - " + name + "] Nuevo Avion en el Aeropuerto")
 	print("[Torre de control - " + name + "] Asignando pista de aterrizaje...")
 	current_lane = -1
@@ -54,7 +68,6 @@ def get_lane(n):
 	else:
 		print("[Torre de control - " + name + "] Todas las pistas se encuentran ocupadas.")
 
-	print(bussy_landing_lanes)
 	return current_lane + 1
 
 def get_out_lane(n):
@@ -65,12 +78,13 @@ def get_out_lane(n):
 def send_airplane_name(airplane_name):
 	print("[Torre de control - " + name + "] Avion " + airplane_name + " quiere despegar	" )
 	planes_hash[airplane_name] = {}	
-
+	print(planes_hash)
 	return 0
 
 
 def send_destination(airplane_name, destination):
 	print("[Torre de control - " + name + "] Recibiendo el destindo del avion " + airplane_name)
+	print(planes_hash)
 	planes_hash[airplane_name][destination] = destination
 	return "1231321"
 

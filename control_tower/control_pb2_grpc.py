@@ -29,6 +29,16 @@ class ControlStub(object):
         request_serializer=control__pb2.Name.SerializeToString,
         response_deserializer=control__pb2.Lane.FromString,
         )
+    self.SendDestination = channel.unary_unary(
+        '/Control/SendDestination',
+        request_serializer=control__pb2.Name.SerializeToString,
+        response_deserializer=control__pb2.Name.FromString,
+        )
+    self.CheckPassengerAndFuell = channel.unary_unary(
+        '/Control/CheckPassengerAndFuell',
+        request_serializer=control__pb2.FuellDestination.SerializeToString,
+        response_deserializer=control__pb2.Name.FromString,
+        )
 
 
 class ControlServicer(object):
@@ -56,6 +66,20 @@ class ControlServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def SendDestination(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def CheckPassengerAndFuell(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_ControlServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -73,6 +97,16 @@ def add_ControlServicer_to_server(servicer, server):
           servicer.SendAirplaneName,
           request_deserializer=control__pb2.Name.FromString,
           response_serializer=control__pb2.Lane.SerializeToString,
+      ),
+      'SendDestination': grpc.unary_unary_rpc_method_handler(
+          servicer.SendDestination,
+          request_deserializer=control__pb2.Name.FromString,
+          response_serializer=control__pb2.Name.SerializeToString,
+      ),
+      'CheckPassengerAndFuell': grpc.unary_unary_rpc_method_handler(
+          servicer.CheckPassengerAndFuell,
+          request_deserializer=control__pb2.FuellDestination.FromString,
+          response_serializer=control__pb2.Name.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
