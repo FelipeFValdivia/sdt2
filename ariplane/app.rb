@@ -56,13 +56,13 @@ plane = Plane.new(linea, a, b, c, d)
 puts "[Avion - " + a + "]: Esperando pista aterrizaje..."
 response = 0
 
-stub = Control::Stub.new('192.168.43.61:50051', :this_channel_is_insecure)
+stub = Control::Stub.new('localhost:50051', :this_channel_is_insecure)
 response = stub.get_lane(Lane.new(value: 45))
 response.value.to_i
 
 while response.value.to_i < 1
   puts "Sin pista disponible, espera en la altura #{-response.value} km"
-  stub = Control::Stub.new('192.168.43.61:50051', :this_channel_is_insecure)
+  stub = Control::Stub.new('localhost:50051', :this_channel_is_insecure)
   response = stub.get_lane(Lane.new(value: 45))
   response.value.to_i
 end
@@ -73,21 +73,26 @@ puts "[Avion - " + a + "]: Aterrizando en la pista " + response.value.to_i.to_s 
 puts "[Avion - " + a + "]: Presione enter para despegar"
 gets.chomp
 
-stub = Control::Stub.new('192.168.43.61:50051', :this_channel_is_insecure)
+stub = Control::Stub.new('localhost:50051', :this_channel_is_insecure)
 stub.send_airplane_name(Name.new(value: a))
 
 
 puts "[Avion - " + a + "]: Ingrese destino:"
 destiny = gets.chomp
+stub = Control::Stub.new('localhost:50051', :this_channel_is_insecure)
+new_tower = stub.send_destination(Name.new(value: 45, destination: destiny))
+puts new_tower
+avion.set_tower = new_tower
+puts "El Destino es " + avion.get_tower
 puts "[Avion - " + a + "]: Pasando por el Gate..."
 
 puts "[Avion - " + a + "]: Pidiendo instrucciones para despegar..."
-stub = Control::Stub.new('192.168.43.61:50051', :this_channel_is_insecure)
+stub = Control::Stub.new('localhost:50051', :this_channel_is_insecure)
 response = stub.get_out_lane(Lane.new(value: response.value.to_i))
 response.value.to_i
 
 while response.value.to_i < 1
-  stub = Control::Stub.new('192.168.43.61:50051', :this_channel_is_insecure)
+  stub = Control::Stub.new('localhost:50051', :this_channel_is_insecure)
   response = stub.get_out_lane(Lane.new(value: 45))
   response.value.to_i
 end

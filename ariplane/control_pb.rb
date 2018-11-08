@@ -7,6 +7,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "Lane" do
     optional :value, :float, 1
   end
+  add_message "Name" do
+    optional :value, :string, 1
+    optional :destination, :string, 2
+  end
+  add_message "FuellDestination" do
+    optional :name, :string, 1
+    optional :fuell, :int32, 2
+    optional :passengers, :int32, 3
+  end
 end
 
 Lane = Google::Protobuf::DescriptorPool.generated_pool.lookup("Lane").msgclass
+Name = Google::Protobuf::DescriptorPool.generated_pool.lookup("Name").msgclass
+FuellDestination = Google::Protobuf::DescriptorPool.generated_pool.lookup("FuellDestination").msgclass

@@ -4,6 +4,22 @@ message Lane {
     float value = 1;
 }
 
+message Name {
+    string value = 1;
+    string destination = 2;
+}
+
+message FuellDestination {
+    string name = 1;
+    int32 fuell = 2;
+    int32 passengers = 3;
+}
+
+
 service Control {
     rpc GetLane(Lane) returns (Lane) {}
+    rpc GetOutLane(Lane) returns (Lane) {}
+    rpc SendAirplaneName(Name) returns (Lane) {}
+    rpc SendDestination(Name) returns (Name) {}
+    rpc CheckPassengerAndFuell(FuellDestination) returns (Name) {}
 }

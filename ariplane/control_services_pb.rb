@@ -14,6 +14,10 @@ module Control
     self.service_name = 'Control'
 
     rpc :GetLane, Lane, Lane
+    rpc :GetOutLane, Lane, Lane
+    rpc :SendAirplaneName, Name, Lane
+    rpc :SendDestination, Name, Name
+    rpc :CheckPassengerAndFuell, FuellDestination, Name
   end
 
   Stub = Service.rpc_stub_class
