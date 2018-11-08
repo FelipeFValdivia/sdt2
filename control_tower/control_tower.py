@@ -41,11 +41,11 @@ class ControlServicer(control_pb2_grpc.ControlServicer):
 
 	def CheckPassengerAndFuell(self, request, context):
 		response = control_pb2.FuellDestination()
-		response.value = check_passenger_and_fuell(request.name, request.fuell, request.passengers)
+		response.name = check_passenger_and_fuell(request.name, request.fuell, request.passengers)
 		return response
 
 	def CheckRunway(self, request, context):
-		response = control_pb2.Name()
+		response = control_pb2.Lane()
 		response.value = check_runway(request.value)
 		return response
 
@@ -96,28 +96,27 @@ def send_destination(airplane_name, destination):
 def check_passenger_and_fuell(airplane_name, fuell, passengers):
 	print("[Torre de control - " + name + "] Consultado restricciones de pasajeros y combustible.")
 	
-	return True
+	return "1"
 
 def check_runway(airplane_name):
 	print("[Torre de control - " + name + "] Consultado restricciones de pasajeros y combustible.")
 	current_runway = -1
 	for i in range(0, runway):
-		
 		if not bussy_runways[i]:
 			current_runway = i
 			break
 
 	if current_runway > -1:
 		bussy_runways[current_runway] = True
-		print("[Torre de control - " + name + "] La pista de aterrizaje asignada es la " + str(current_lane + 1))
+		print("[Torre de control - " + name + "] La pista de despegue asignada es la " + str(current_runway + 1))
 	else:
 		print("[Torre de control - " + name + "] Todas las pistas se encuentran ocupadas.")
-
-	return runway + 1
+	current_runway += 1
+	return current_runway
 
 def get_out_runway(n):
-	print("[Torre de control - " + name + "] Pista de despegue" + str(n) + " ha sido desocupada")
-	bussy_runways[n] = False
+	print("[Torre de control - " + name + "] Pista de despegue" + str(int(n)) + " ha sido desocupada")
+	bussy_runways[int(n)] = False
 	return 1
 
 
