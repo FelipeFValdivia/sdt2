@@ -61,11 +61,6 @@ class ControlServicer(control_pb2_grpc.ControlServicer):
 		return response
 
 	def GetDeparturesPlanes(self, request, context):
-		print("departures")
-		print("departures")
-		print("departures")
-		print("departures")
-		print("departures")
 		response = control_pb2.Plane()
 		response.name = get_departures_planes("var")
 		return response
@@ -110,14 +105,14 @@ def send_destination(airplane_name, destination):
 	response_destination_ip = "Destino no encontrado"
 
 	for destination_of_fly in destinys_identifiers:
-		if str(airplane_name).encode("ascii") in destination_of_fly:
+		if str(destination).encode("ascii") in destination_of_fly:
 			response_destination_ip = str.split(destination_of_fly, " ")[-1]
 	return response_destination_ip
 
 def check_passenger_and_fuell(airplane_name, fuell, passengers):
 	print("[Torre de control - " + name + "] Consultado restricciones de pasajeros y combustible.")
 	
-	return "1"
+	return str(int(fuell > 1500 and passengers < 300))
 
 def check_runway(airplane_name):
 	print("[Torre de control - " + name + "] Consultado restricciones de pasajeros y combustible.")
@@ -138,7 +133,7 @@ def check_runway(airplane_name):
 
 def get_out_runway(n):
 	print("[Torre de control - " + name + "] Pista de despegue" + str(int(n)) + " ha sido desocupada")
-	bussy_runways[int(n)] = False
+	bussy_runways[int(n) - 1] = False
 	return 1
 
 

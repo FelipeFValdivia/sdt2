@@ -20,6 +20,7 @@ stdin.addListener("data", function(d) {
       } else {
         console.log("Error:", error.message);
       }
+
     });
     client.GetDeparturesPlanes(1, (error, response) => {
       if (!error) {
@@ -28,6 +29,7 @@ stdin.addListener("data", function(d) {
         console.log("Error:", error.message);
       }
     });
+    
 
     console.log("[Pantalla de informacion] Ingrese la IP del aeropuerto que desea escuchar:")
     
