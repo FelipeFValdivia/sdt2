@@ -1,0 +1,168 @@
+
+
+
+
+Network Working Group
+Internet-Draft
+Intended status: Informational                         November 08, 2018
+Expires: May 12, 2019
+
+
+                             RFC Tarea2 SD
+
+Abstract
+
+   Resume of how a control tower communicates with an airplane and also
+   with a information screen.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on May 12, 2019.
+
+Copyright Notice
+
+   Copyright (c) 2018 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+
+                          Expires May 12, 2019                  [Page 1]
+
+Internet-Draft                     SD                      November 2018
+
+
+1.  Introduccion
+
+   En este documento se describen los protocolos de comunicacion que
+   siguen aviones y torre de control junto a los que siguen torre de
+   control y pantalla. no se incluiran tildes
+
+2.  Torre - Avion
+
+2.1.  El avion es recibido por la torre (el avion se registra indicando
+      su nombre) y busca una pista de aterrizaje, en caso de no
+      encontrar pista se informa de esto al avion y se le asigna una
+      altura para esperar en cola.  En caso de existir una pista de
+      aterrizaje, se le informa del numero de pista al avion.
+
+2.2.  El avion indica a la torre que quiere despegar, enviandole su
+      nombre.
+
+2.3.  El avion indica a la torre que quiere ir a un destino, con lo que
+      la torre le indica la ubicacion (ip) de la nueva torre.
+
+2.4.  Una vez que el avion pasa por la gate de salida, consulta por los
+      niveles de combustible y peso de pasajeros.  La torre verifica que
+      sea un combustible mayor al minimo y un peso menor al maximo, en
+      caso contrario se debe ajustar estos valores.  Se le informa al
+      avion respecto a este resultado.
+
+2.5.  Una vez pasada la puerta el avion solicita una pista de despegue a
+      la torre, esta busca una pista de despegue desocupada e informa al
+      avion, en caso de no existir debera esperar.
+
+2.6.  Una vez que se asigna por parte de la torre una pista de despegue
+      para el avion, este le informa a la torre que se ha desocupado la
+      pista de aterrizaje que ocupaba.
+
+2.7.  El avion despega y le informa a la torre que debe desocupar la
+      pista de despegue.
+
+3.  Torre - Pantalla
+
+3.1.  La Pantalla decide desde que torre recibe informacion en su
+      instanciacion, ingresando la ip de la torre
+
+
+
+
+
+
+
+
+
+
+                          Expires May 12, 2019                  [Page 2]
+
+Internet-Draft                     SD                      November 2018
+
+
+3.2.  La Pantalla recibe informacion desde la torre cada vez que un
+      avion interactue con esta, por lo que muestra aterrizajes y
+      despegues en la torre asociada.
+
+4.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+Author's Address
+
+Miguel Huichaman - Felipe Flores
+
+Email: miguel.huichaman@alumnos.inf.utfsml.cl - felipe.floresv@alumnos.usm.cl
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          Expires May 12, 2019                  [Page 3]
