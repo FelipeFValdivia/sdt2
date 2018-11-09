@@ -16,3 +16,8 @@ Se recomienda utilizar las mismas versiones para evitar problemas de compatibili
 
 Nota: Para node es necesario instalar el package grpc, para esto se recomienda hacerlo mediante npm, instalando npm y luego ejecutando el comando:
 npm install grpc --save
+
+
+Desarrolladores: 
+Felipe Flores Valdivia - 201123518-5
+Miguel Huichamán Briceño - 201273508-4
